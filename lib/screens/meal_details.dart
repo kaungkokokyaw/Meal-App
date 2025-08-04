@@ -13,6 +13,9 @@ class MealDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final favoriteMeals = ref.watch(favoriteMealsProvider);
+    final isFavorite = favoriteMeals.contains(meal);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -31,7 +34,7 @@ class MealDetailsScreen extends ConsumerWidget {
                 ),
               );
             },
-            icon: Icon(Icons.star_border_outlined),
+            icon: Icon(isFavorite ? Icons.star : Icons.star_border),
           ),
         ],
       ),
@@ -65,7 +68,11 @@ class MealDetailsScreen extends ConsumerWidget {
                 ),
               ),
             SizedBox(
-              height: 24,
+              width: 300,
+              child: Divider(
+                thickness: 1,
+                color: Colors.white,
+              ),
             ),
             Text(
               'Steps',
